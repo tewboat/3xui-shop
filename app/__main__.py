@@ -2,7 +2,7 @@ import asyncio
 import logging
 from urllib.parse import urljoin
 
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, InputFile
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -23,6 +23,7 @@ from app.bot.utils.constants import (
     DEFAULT_LANGUAGE,
     I18N_DOMAIN,
     TELEGRAM_WEBHOOK,
+    CERT_PATH
 )
 from app.config import DEFAULT_BOT_HOST, DEFAULT_LOCALES_DIR, Config, load_config
 from app.db.database import Database
@@ -41,7 +42,7 @@ async def on_startup(config: Config, bot: Bot, services: ServicesContainer, db: 
     webhook_url = urljoin(config.bot.DOMAIN, TELEGRAM_WEBHOOK)
 
     if await bot.get_webhook_info() != webhook_url:
-        await bot.set_webhook(webhook_url)
+        await bot.set_webhook(url=webhook_url, certificate=InputFile())
 
     current_webhook = await bot.get_webhook_info()
     logging.info(f"Current webhook URL: {current_webhook.url}")
