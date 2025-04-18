@@ -12,6 +12,10 @@ APP_WINDOWS_SCHEME = "hiddify://import/"
 
 # endregion
 
+# region: Files
+CERT_PATH = "/etc/tls/certs/3xui.pem"
+# endregion
+
 # region: Keys
 MAIN_MESSAGE_ID_KEY = "main_message_id"
 PREVIOUS_CALLBACK_KEY = "previous_callback"
